@@ -1,0 +1,25 @@
+{
+    "name": "M5Unit8Servos2",
+    "version": "1.0.0",
+    "description": "Arduino library for the M5Stack Unit 8Servos2 I2C expansion unit",
+    "keywords": [
+        "m5stack",
+        "i2c",
+        "servo",
+        "pwm",
+        "adc",
+        "rgb"
+    ],
+    "authors": {
+        "name": "M5Stack",
+        "url": "https://www.m5stack.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/m5stack/M5Unit-8Servos2-I2C.git"
+    },
+    "license": "MIT",
+    "frameworks": "arduino",
+    "platforms": "espressif32",
+    "headers": "M5Unit8Servos2.h"
+}
