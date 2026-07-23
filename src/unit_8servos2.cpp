@@ -277,6 +277,23 @@ uint8_t M5Unit8Servos2::getFirmwareVersion()
     return readByte(UNIT_8SERVOS2_REG_VERSION);
 }
 
+uint8_t M5Unit8Servos2::getI2CAddressOffset()
+{
+    return readByte(UNIT_8SERVOS2_REG_ADDR_OFFSET);
+}
+
+bool M5Unit8Servos2::refreshI2CAddress()
+{
+    uint8_t offset = 0;
+    if (!readBytes(UNIT_8SERVOS2_REG_ADDR_OFFSET, &offset, 1) || offset > 0x0F) return false;
+    if (!writeByte(UNIT_8SERVOS2_REG_I2C_ADDR_REFRESH, 1)) return false;
+
+    // The firmware applies the new address in its main loop after this write.
+    delay(1);
+    _addr = UNIT_8SERVOS2_DEFAULT_ADDR + offset;
+    return true;
+}
+
 uint8_t M5Unit8Servos2::getI2CAddress()
 {
     return readByte(UNIT_8SERVOS2_REG_I2C_ADDR);

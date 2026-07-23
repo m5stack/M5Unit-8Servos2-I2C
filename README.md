@@ -109,12 +109,18 @@ unit.begin(&Wire, UNIT_8SERVOS2_DEFAULT_ADDR, -1, -1);
 | Servo | `setServoAngle()`, `getServoAngle()` |
 | PWM | `setPWMDuty()`, `getPWMDuty()`, `setTimerFrequency()`, `getTimerFrequency()` |
 | RGB | `setRGBConfig()`, `getRGBConfig()`, `setRGBBufferIndex()`, `getRGBBufferIndex()`, `setRGBBuffer()`, `getRGBBuffer()` |
-| Device information | `getUID()`, `getFirmwareVersion()`, `getI2CAddress()` |
+| Device information | `getUID()`, `getFirmwareVersion()`, `getI2CAddress()`, `getI2CAddressOffset()` |
+| I2C address | `refreshI2CAddress()` |
 | Telemetry | `getSysVREF()`, `getGroveVoltage()`, `getDCVoltage()`, `getSysCurrent()` |
 
 Channels are numbered `0` through `7`. Timer group `0` controls channels 0-3,
 and timer group `1` controls channels 4-7. Configure a channel with `setMode()`
 before using its mode-specific methods.
+
+Firmware version `0x02` and later exposes the hardware address locator at
+register `0xF8`. After changing the locator, call `refreshI2CAddress()` while
+the device is still reachable at its old address. The library then switches to
+the refreshed address (`UNIT_8SERVOS2_DEFAULT_ADDR + offset`) automatically.
 
 ## Development
 

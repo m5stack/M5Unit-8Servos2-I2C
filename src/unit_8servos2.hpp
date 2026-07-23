@@ -36,6 +36,8 @@
 #define UNIT_8SERVOS2_REG_UID_START           (0xE0)
 #define UNIT_8SERVOS2_REG_UID_END             (0xEB)
 #define UNIT_8SERVOS2_REG_SYS_ANALOG_START    (0xF0)
+#define UNIT_8SERVOS2_REG_ADDR_OFFSET         (0xF8)
+#define UNIT_8SERVOS2_REG_I2C_ADDR_REFRESH    (0xFC)
 #define UNIT_8SERVOS2_REG_VERSION             (0xFE)
 #define UNIT_8SERVOS2_REG_I2C_ADDR            (0xFF)
 
@@ -247,6 +249,22 @@ public:
      *        获取固件版本。
      */
     uint8_t getFirmwareVersion();
+
+    /**
+     * @brief Get the hardware I2C address locator offset.
+     *        获取硬件 I2C 地址拨码偏移值。
+     * @return Address offset in the range 0-15.
+     */
+    uint8_t getI2CAddressOffset();
+
+    /**
+     * @brief Refresh the I2C address from the hardware locator.
+     *        根据硬件地址拨码刷新 I2C 地址。
+     * @return true if the offset was read and the refresh command was sent.
+     * @note Requires firmware version 0x02 or later. The active address becomes
+     *       UNIT_8SERVOS2_DEFAULT_ADDR + getI2CAddressOffset().
+     */
+    bool refreshI2CAddress();
 
     /**
      * @brief Get I2C address.

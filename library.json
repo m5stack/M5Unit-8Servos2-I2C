@@ -1,6 +1,6 @@
 {
     "name": "M5Unit8Servos2",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Arduino library for the M5Stack Unit 8Servos2 I2C expansion unit",
     "keywords": [
         "m5stack",
